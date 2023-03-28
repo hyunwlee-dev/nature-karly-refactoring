@@ -1,4 +1,5 @@
 /* ------------------------------- 공통 ------------------------------ */
+export * from './Label/Label';
 export * from './A11yHidden/A11yHidden';
 export * from './Container/Container';
 export * from './Product/Product';
@@ -6,7 +7,6 @@ export * from './Button/Button';
 export * from './Input/General/Input';
 export * from './IconComponent/IconComponent';
 export * from './Nav/Nav';
-export * from './Label/Label';
 export * from './Tag/Tag';
 export * from './ModalWindow/ModalWindow';
 export * from './Title/Title';

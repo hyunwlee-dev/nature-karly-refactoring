@@ -27,6 +27,7 @@ export function Label({
   invisibleLabel,
   labelStyle,
   children,
+  className,
   ...restProps
 }) {
   const combineClassNames = `${classes.label} ${
