@@ -137,7 +137,6 @@ export default function Header({ navList: initialNavList }) {
                   style={{
                     width: '194px',
                     height: '36px',
-                    border: 'none',
                     backgroundColor: 'var(--color-gray-50)',
                     border: '1px solid var(--color-primary)',
                   }}
