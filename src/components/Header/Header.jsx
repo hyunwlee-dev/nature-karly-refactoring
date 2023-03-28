@@ -20,7 +20,7 @@ import { IconComponent } from '@/components';
 import location from '@/assets/icons/Icon/header/location.svg';
 import heart from '@/assets/icons/Icon/header/heart.svg';
 import cart from '@/assets/icons/Icon/header/Cart.svg';
-import down from '@/assets/icons/Icon/header/iconDown1.svg';
+import down from '@/assets/icons/Icon/header/Icon_down1.svg';
 import search from '@/assets/icons/Icon/header/Search.svg';
 
 export default function Header({ navList: initialNavList }) {
@@ -70,12 +70,17 @@ export default function Header({ navList: initialNavList }) {
                 </a>
                 <span aria-hidden="true">|</span>
                 <a href="#">뷰티칼리</a>
+                <span className={classes.newIcon}>N</span>
               </div>
               <form action="" className={classes.headerSearchForm}>
                 <fieldset>
                   <A11yHidden>검색 폼</A11yHidden>
-                  <Label htmlFor="검색" invisibleLabel={true}></Label>
-                  <Input type="search" placeholder="검색어를 입력해주세요" />
+                  <Label htmlFor="검색" invisibleLabel={true}>검색</Label>
+                  <Input 
+                    type="search" 
+                    placeholder="검색어를 입력해주세요" 
+                    style={{width: '400px',
+                            height: '60px'}}/>
                 </fieldset>
                 <IconComponent>
                   <img src={search} alt="검색아이콘" />
@@ -107,7 +112,7 @@ export default function Header({ navList: initialNavList }) {
             </div>
           </div>
           <div className={classes.navWrapper}>
-            <Navigation headline="네비게이션" list={navList} />
+            <Navigation headline="메인메뉴" list={navList} />
             <NavSide />
           </div>
         </Container>
@@ -118,7 +123,7 @@ export default function Header({ navList: initialNavList }) {
       <header className={classes.smallHeader}>
         <Container className={classes.headerContainer}>
           <div className={classes.smallHeaderTop}>
-            <Navigation headline="네비게이션" list={navList} />
+            <Navigation headline="메인메뉴" list={navList} style={{width: '1800px'}}/>
             <form
               action=""
               className={`${classes.headerSearchForm} ${classes.smallForm}`}
@@ -130,10 +135,10 @@ export default function Header({ navList: initialNavList }) {
                   type="search"
                   placeholder="검색어를 입력해주세요"
                   style={{
-                    width: '200px',
-                    height: '12px',
-                    border: 'none',
+                    width: '194px',
+                    height: '36px',
                     backgroundColor: 'var(--color-gray-50)',
+                    border: '1px solid var(--color-primary)',
                   }}
                 />
               </fieldset>

@@ -28,6 +28,7 @@
   color: var(--color-primary);
 }
 
+
 .headerSearch{
   display: flex;
 }
@@ -39,6 +40,7 @@
   font-size: 1.25rem;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .headerSwitch a{
@@ -49,6 +51,15 @@
 
 .headerSwitch .activeSwitch{
   color: var(--color-primary);
+}
+
+.newIcon{
+  position: absolute;
+  top: 10px;
+  right: 55px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-accent);
 }
 
 .headerSearchForm{
@@ -83,6 +94,7 @@
 }
 
 
+
 /* 스크롤 시 바뀐 헤더 컴포넌트 */
 
 .smallHeader{
@@ -105,7 +117,7 @@
 }
 
 .smallForm input::placeholder{
-  font-size: .875rem;
+  font-size: 11px;
 }
 
 .smallHeaderIconList li{
