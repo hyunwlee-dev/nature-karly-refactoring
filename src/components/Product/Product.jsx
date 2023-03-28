@@ -36,7 +36,6 @@ export function Product({ isSwiper }) {
   const dataProps = { width: '45px', height: '45px' };
 
   const { readData, data } = useReadData('products');
-
   const [modalState, setModalState] = useRecoilState(modalStates);
   const setShowModal = useSetRecoilState(showModalState);
 
@@ -49,11 +48,13 @@ export function Product({ isSwiper }) {
       <div className="productSwiper">
         <button
           ref={prevRef}
+          aria-label="이전"
           className="swiper-button-prev"
           type="button"
         ></button>
         <button
           ref={nextRef}
+          aria-label="다음"
           className="swiper-button-next"
           type="button"
         ></button>
@@ -81,6 +82,7 @@ export function Product({ isSwiper }) {
                       <img alt={item.image.alt} src={item.image.thumbnail} />
                     </Link>
                     <IconComponent
+                      aria-label="장바구니 담기"
                       className={classes.cart}
                       data-image="cart"
                       dataProps={dataProps}
@@ -138,6 +140,7 @@ export function Product({ isSwiper }) {
                   <img alt={item.image.alt} src={item.image.thumbnail} />
                 </Link>
                 <IconComponent
+                  aria-label="장바구니 담기"
                   className={classes.cart}
                   data-image="cart"
                   dataProps={dataProps}

@@ -8,7 +8,7 @@ import classes from './Layout.module.css';
 
 const navList = [
   { id: 'new', to: '#', text: '신상품' },
-  { id: 'best', to: '/productlist', text: '베스트' },
+  { id: 'best', to: '#/productlist', text: '베스트' },
   { id: 'rational', to: '#', text: '알뜰쇼핑' },
   { id: 'discount', to: '#', text: '특가/혜택' },
 ];

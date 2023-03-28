@@ -13,10 +13,13 @@ import lineBanner from '@/assets/banner/line-banner01.png';
 
 import { Container, Product, Title } from '@/components';
 import { useReadData } from '@/firebase/firestore';
+import { useDocumentTitle } from '@/hook/useDocumentTitle';
 
 /* -------------------------------------------------------------------------- */
 
 export default function MainPage() {
+  useDocumentTitle('칼리 - 마켓칼리/뷰티칼리');
+
   const { readData, data } = useReadData('banner');
   useEffect(() => {
     readData();
