@@ -22,6 +22,7 @@ const getFontSize = (variable) => {
 /* ----------------------------------------------------------------------- */
 
 export function Label({
+  className,
   htmlFor,
   isEssential,
   invisibleLabel,
@@ -29,9 +30,7 @@ export function Label({
   children,
   ...restProps
 }) {
-  const combineClassNames = `${classes.label} ${
-    classes[labelStyle]
-  } ${classEssential(isEssential)}`.trim();
+  const combineClassNames = `${classes.label} ${className} ${classes[labelStyle]} ${classEssential(isEssential)}`.trim();
   if (!invisibleLabel) {
     return (
       <label
