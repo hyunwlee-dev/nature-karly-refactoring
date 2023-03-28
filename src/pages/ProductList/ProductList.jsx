@@ -53,7 +53,11 @@ export default function ProductList() {
                 data.map((item, index) => {
                   return (
                     <li key={index}>
-                      <Input id={item.brand} type="checkbox" />
+                      <Input
+                        data-is-checked-default
+                        id={item.brand}
+                        type="checkbox"
+                      />
                       <Label htmlFor={item.brand}>{item.brand}</Label>
                       <span className={classes.count}>1</span>
                     </li>

@@ -34,6 +34,17 @@
 .visualSwiper .swiper-button-prev {
   color: var(--color-white);
   background: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: all .5s;
+}
+
+.visualSwiper:hover .swiper-button-next,
+.visualSwiper:hover .swiper-button-prev,
+.visualSwiper:focus .swiper-button-next,
+.visualSwiper:focus .swiper-button-prev
+.visualSwiper:focus-within .swiper-button-next,
+.visualSwiper:focus-within .swiper-button-prev{
+  opacity: 1;
 }
 
 .visualSwiper .swiper-button-next {

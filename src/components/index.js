@@ -11,7 +11,7 @@ export * from './Tag/Tag';
 export * from './ModalWindow/ModalWindow';
 export * from './Title/Title';
 export * from './Layout/Layout';
-export * from './Counter/Counter'
+export * from './Counter/Counter';
 
 /* ------------------------------- 내부 링크 이동 리스트 ------------------------------ */
 export * from './InternalLinkMove/InternalLinkMove';

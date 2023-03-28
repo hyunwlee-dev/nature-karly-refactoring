@@ -8,6 +8,20 @@
   position: relative;
   margin-bottom: 1rem;
   font-size: 0;
+  overflow: hidden;
+  
+}
+
+.productImg a{
+  outline-offset: -1px;
+}
+
+.productImg img{
+  transition: all .5s;
+}
+
+.productImg:hover img{
+  transform: scale(1.1);
 }
 
 .productInfo {
@@ -70,6 +84,7 @@
   right: 0.9375rem;
   bottom: 1.0625rem;
   cursor: pointer;
+  border-radius: 50%;
 }
 
 .icon > span{

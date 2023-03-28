@@ -4,9 +4,10 @@ import {
   // useLayoutEffect,
 } from 'react';
 import { Link } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import PropTypes from 'prop-types';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+
 import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -32,7 +33,7 @@ export function Product({ isSwiper }) {
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
-  const datadata = { width: '45px', height: '45px' };
+  const dataProps = { width: '45px', height: '45px' };
 
   const { readData, data } = useReadData('products');
 
@@ -46,6 +47,16 @@ export function Product({ isSwiper }) {
   if (isSwiper) {
     return (
       <div className="productSwiper">
+        <button
+          ref={prevRef}
+          className="swiper-button-prev"
+          type="button"
+        ></button>
+        <button
+          ref={nextRef}
+          className="swiper-button-next"
+          type="button"
+        ></button>
         <Swiper
           modules={[Navigation]}
           slidesPerGroup={4}
@@ -66,12 +77,15 @@ export function Product({ isSwiper }) {
               return (
                 <SwiperSlide key={item.id}>
                   <div className={classes.productImg}>
-                    <img alt={item.image.alt} src={item.image.thumbnail} />
+                    <Link to="/productdetail">
+                      <img alt={item.image.alt} src={item.image.thumbnail} />
+                    </Link>
                     <IconComponent
                       className={classes.cart}
                       data-image="cart"
-                      datadata={datadata}
+                      dataProps={dataProps}
                       role="button"
+                      tabIndex="0"
                       onClick={() => {
                         setModalState({ ...modalState, addCartModal: true });
                         setShowModal(true);
@@ -109,16 +123,6 @@ export function Product({ isSwiper }) {
               );
             })}
         </Swiper>
-        <button
-          ref={prevRef}
-          className="swiper-button-prev"
-          type="button"
-        ></button>
-        <button
-          ref={nextRef}
-          className="swiper-button-next"
-          type="button"
-        ></button>
       </div>
     );
   }
@@ -130,12 +134,15 @@ export function Product({ isSwiper }) {
           return (
             <li key={item.id}>
               <div className={classes.productImg}>
-                <img alt={item.image.alt} src={item.image.thumbnail} />
+                <Link to="/productdetail">
+                  <img alt={item.image.alt} src={item.image.thumbnail} />
+                </Link>
                 <IconComponent
                   className={classes.cart}
                   data-image="cart"
-                  datadata={datadata}
+                  dataProps={dataProps}
                   role="button"
+                  tabIndex="0"
                   onClick={() => {
                     setModalState({ ...modalState, addCartModal: true });
                     setShowModal(true);

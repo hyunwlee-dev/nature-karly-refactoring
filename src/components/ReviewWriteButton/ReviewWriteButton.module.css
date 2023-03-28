@@ -1,0 +1,11 @@
+.writeButton {
+  padding: 1rem 2rem;
+  width: 9.6875rem;
+  height: 2.75rem;
+  text-align: center;
+  line-height: var(--line-height-md);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
