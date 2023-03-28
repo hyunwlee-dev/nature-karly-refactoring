@@ -12,10 +12,23 @@ import saladViewImage from '@/assets/salad/detail_view.jpg';
 
 export function InternalLinkMoveTest() {
   const internalLinkList = [
-    { id: 'item1', name: '상품설명', to: '#productDescription' },
-    { id: 'item2', name: '상세정보', to: '#productDetail' },
-    { id: 'item3', name: '후기', to: '#productReview', isNumberOption: true },
-    { id: 'item4', name: '문의', to: '#productInquiry' },
+    {
+      id: 'item1',
+      name: '상품설명',
+      to: '#/productdetail#productDescription',
+    },
+    {
+      id: 'item2',
+      name: '상세정보',
+      to: '#/productdetail#productDetailImage',
+    },
+    {
+      id: 'item3',
+      name: '후기',
+      to: '#/productdetail#productReview',
+      isNumberOption: true,
+    },
+    { id: 'item4', name: '문의', to: '#/productdetail#productInquiry' },
   ];
 
   return (
@@ -29,7 +42,11 @@ export function InternalLinkMoveTest() {
           id="productDescription"
           src={saladViewImage}
         />
-        <img alt="상품상세정보이미지" id="productDetail" src={saladInfoImage} />
+        <img
+          alt="상품상세정보이미지"
+          id="productDetailImage"
+          src={saladInfoImage}
+        />
         <section className={classes.productReview} id="productReview">
           <ProductReviewSection />
         </section>

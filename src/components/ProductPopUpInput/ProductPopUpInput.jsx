@@ -31,6 +31,7 @@ export function ProductPopUpInput({ inputName }) {
       placeholder="제목을 입력해주세요"
       type="text"
       onChange={getTitleText}
+      autoComplete="off"
     />
   );
 }
