@@ -104,3 +104,20 @@ export const birthValidation = selector({
     return isBirthDay(get(birthState));
   },
 });
+
+/* -------------------------------------------------------------------------- */
+
+export const isLoading = atom({
+  key: 'isLoading',
+  default: false
+});
+
+export const error = atom({
+  key: 'error',
+  default: null
+});
+
+export const userInfo = atom({
+  key: 'userInfo',
+  default: null
+});

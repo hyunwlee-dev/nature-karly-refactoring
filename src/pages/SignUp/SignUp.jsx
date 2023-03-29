@@ -6,8 +6,10 @@ import classes from './SignUp.module.css';
 import {
   birthState,
   emailState,
+  error,
   genderState,
   idState,
+  isLoading,
   nameState,
   phoneState,
   pwState,
@@ -34,6 +36,8 @@ import { PasswordValidation } from '@/components/InputValidation/Password/passwo
 import { PhoneValidation } from '@/components/InputValidation/Phone/PhoneValidation';
 import { RePasswordValidation } from '@/components/InputValidation/RePassword/RePasswordValidation';
 import { useDocumentTitle } from '@/hook/useDocumentTitle';
+import { useRecoilSignUp } from '@/firebase/auth/useSignUp';
+import { SubmitButton } from '@/components/Button/SubmitButton';
 
 export default function SignUp() {
   const idId = useId();
@@ -147,7 +151,7 @@ export default function SignUp() {
       content: '본인은 만 14세 이상입니다. (필수)',
     },
   ];
-
+  
   return (
     <div style={{ display: 'flex', justifyContent: 'center', padding: '80px' }}>
       <div className={classes.signUp}>
@@ -412,7 +416,7 @@ export default function SignUp() {
               ))}
             </div>
 
-            <Button className={classes.submit}>가입하기</Button>
+            <SubmitButton className={classes.submit}>가입하기</SubmitButton>
           </Fieldset>
         </form>
       </div>
