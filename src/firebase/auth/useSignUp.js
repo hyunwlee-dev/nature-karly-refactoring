@@ -3,10 +3,12 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   sendEmailVerification as firebaseSendEmailVerification,
+  getAuth,
 } from 'firebase/auth';
 import { auth } from './index';
-import { emailState, error, idState, isLoading,  pwState,  userInfo } from '@/@store/signUpState';
+import { emailState, idState, pwState } from '@/@store/signUpState';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { firebaseApp } from '../app';
 
 /* -------------------------------------------------------------------------- */
 
@@ -24,13 +26,14 @@ export function useSignUp(sendEmailVerification = false) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
+  const firebaseAuth = getAuth(firebaseApp);
 
   const signUp = useCallback(
     async (email, password, displayName) => {
       setIsLoading(true);
       try {
         const userCredentials = await createUserWithEmailAndPassword(
-          auth,
+          firebaseAuth,
           email,
           password
         );
@@ -64,52 +67,5 @@ export function useSignUp(sendEmailVerification = false) {
       signUp,
     }),
     [isLoading, error, user, signUp]
-  );
-}
-
-export function useRecoilSignUp(sendEmailVerification = false) {
-  const setIsLoading = useSetRecoilState(isLoading);
-  const setError = useSetRecoilState(error);
-  const setUserInfo = useSetRecoilState(userInfo);
-  const email = useRecoilValue(emailState);
-  const password = useRecoilValue(pwState);
-
-  
-  const signUp = useCallback(
-    async ( email, password) => {
-      setIsLoading(true);
-      try {
-        const userCredentials = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-          
-        const { user } = userCredentials;
-        console.log('user', user);
-
-        if (displayName && user) {
-          await updateProfile(user, {displayName: 'testests'});
-        }
-
-        if (sendEmailVerification && user) {
-          const result = await firebaseSendEmailVerification(user);
-        }
-
-        setUser(user);
-        return user;
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-  );
-
-  return useMemo(
-    () => ({
-      signUp,
-    }),
-    [signUp]
   );
 }

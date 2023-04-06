@@ -4,12 +4,13 @@ import { useSetRecoilState } from 'recoil';
 
 import classes from './SignUp.module.css';
 import {
+  additionalState,
+  addressState,
   birthState,
   emailState,
-  error,
+  etcState,
   genderState,
   idState,
-  isLoading,
   nameState,
   phoneState,
   pwState,
@@ -36,8 +37,20 @@ import { PasswordValidation } from '@/components/InputValidation/Password/passwo
 import { PhoneValidation } from '@/components/InputValidation/Phone/PhoneValidation';
 import { RePasswordValidation } from '@/components/InputValidation/RePassword/RePasswordValidation';
 import { useDocumentTitle } from '@/hook/useDocumentTitle';
-import { useRecoilSignUp } from '@/firebase/auth/useSignUp';
 import { SubmitButton } from '@/components/Button/SubmitButton';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  sendEmailVerification,
+  updateProfile,
+} from 'firebase/auth';
+import { firebaseApp } from '@/firebase/app';
+import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { useSignUp } from '@/firebase/auth/useSignUp';
+import { useRecoilCallback } from 'recoil';
+import { useRecoilSnapshot } from 'recoil';
+import { useCreateAuthUser } from '@/firebase/firestore';
 
 export default function SignUp() {
   const idId = useId();
@@ -151,7 +164,48 @@ export default function SignUp() {
       content: '본인은 만 14세 이상입니다. (필수)',
     },
   ];
-  
+
+  const firebaseAuth = getAuth(firebaseApp);
+  const { isLoading, error, user, signUp } = useSignUp(false);
+  const {
+    isLoading: isCreateLoading,
+    error: createError,
+    createAuthUser,
+  } = useCreateAuthUser('users');
+
+  const getSnapshotEmailAndPwState = useRecoilCallback(({ snapshot }) => () => {
+    const idValue = snapshot.getLoadable(idState).contents;
+    const pwValue = snapshot.getLoadable(pwState).contents;
+    return { idValue, pwValue };
+  });
+
+  const getSnapshotOthersState = useRecoilCallback(({ snapshot }) => () => {
+    const nameValue = snapshot.getLoadable(nameState).contents;
+    const emailValue = snapshot.getLoadable(emailState).contents;
+    const phoneValue = snapshot.getLoadable(phoneState).contents;
+    const addressValue = snapshot.getLoadable(addressState).contents;
+    const genderValue = snapshot.getLoadable(genderState).contents;
+    const birthValue = snapshot.getLoadable(birthState).contents;
+    const addtionalValue = snapshot.getLoadable(additionalState).contents;
+    const etcValue = snapshot.getLoadable(etcState).contents;
+    return ({ nameValue, emailValue, phoneValue, addressValue, genderValue, birthValue, addressValue, addtionalValue, etcValue});
+  })
+
+  const signUpUser = async () => {
+    const { idValue, pwValue } = getSnapshotEmailAndPwState();
+    const updatedIdValue = idValue + '@natureKarly.com';
+    const userAuth = await signUp(updatedIdValue, pwValue);
+    await createAuthUser(userAuth, {idValue, pwValue, ...getSnapshotOthersState()});
+  };
+
+  if (isLoading || isCreateLoading) {
+    return <div role="alert">페이지를 준비 중입니다.</div>;
+  }
+
+  if (error || createError) {
+    return <div role="alert">오류! {error + ''}</div>;
+  }
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center', padding: '80px' }}>
       <div className={classes.signUp}>
@@ -415,8 +469,9 @@ export default function SignUp() {
                 </Fragment>
               ))}
             </div>
-
-            <SubmitButton className={classes.submit}>가입하기</SubmitButton>
+            <SubmitButton onClick={signUpUser} className={classes.submit}>
+              가입하기
+            </SubmitButton>
           </Fieldset>
         </form>
       </div>
