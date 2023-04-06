@@ -1,4 +1,4 @@
-.nav{
+.nav {
   width: 880px;
   height: 4.5rem;
   margin-left: 20px;
@@ -9,7 +9,7 @@
   font-weight: 600;
 }
 
-.navMenu{
+.navMenu {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -17,21 +17,21 @@
   margin-left: 30px;
 }
 
-.navMenu li{
+.navMenu li {
   margin: 0 auto;
 }
 
-.navMenu a{
+.navMenu a {
   text-decoration: none;
   color: var(--color-content);
 }
 
-.navMenu a:hover{
+.navMenu a:hover {
   text-decoration: underline;
   color: var(--color-primary);
 }
 
-.navSide{
+.navSide {
   width: 13%;
   height: 1.6875rem;
   line-height: 1.6875rem;
@@ -44,6 +44,6 @@
   font-weight: 500;
 }
 
-.navSide span:first-child{
+.navSide span:first-child {
   color: var(--color-primary);
 }

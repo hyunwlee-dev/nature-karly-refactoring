@@ -11,6 +11,8 @@ import ProductDetail from '@/pages/ProductDetail/ProductDetail';
 import ProductList from '@/pages/ProductList/ProductList';
 import SignUp from '@/pages/SignUp/SignUp';
 import CartPage from '@/pages/CartPage/CartPage';
+import { useEffect } from 'react';
+import { Suspense } from 'react';
 
 function App() {
   return (

@@ -35,15 +35,17 @@
   color: var(--color-white);
   background: rgba(0, 0, 0, 0.2);
   opacity: 0;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .visualSwiper:hover .swiper-button-next,
 .visualSwiper:hover .swiper-button-prev,
 .visualSwiper:focus .swiper-button-next,
-.visualSwiper:focus .swiper-button-prev
-.visualSwiper:focus-within .swiper-button-next,
-.visualSwiper:focus-within .swiper-button-prev{
+.visualSwiper:focus
+  .swiper-button-prev
+  .visualSwiper:focus-within
+  .swiper-button-next,
+.visualSwiper:focus-within .swiper-button-prev {
   opacity: 1;
 }
 
@@ -54,9 +56,9 @@
   left: 17%;
 }
 
-.visualSwiper img{
-  width:100%;
-  height:auto;
+.visualSwiper img {
+  width: 100%;
+  height: auto;
 }
 
 .productSwiper {

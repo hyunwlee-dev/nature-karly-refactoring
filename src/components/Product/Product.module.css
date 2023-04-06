@@ -9,18 +9,17 @@
   margin-bottom: 1rem;
   font-size: 0;
   overflow: hidden;
-  
 }
 
-.productImg a{
+.productImg a {
   outline-offset: -1px;
 }
 
-.productImg img{
-  transition: all .5s;
+.productImg img {
+  transition: all 0.5s;
 }
 
-.productImg:hover img{
+.productImg:hover img {
   transform: scale(1.1);
 }
 
@@ -87,18 +86,18 @@
   border-radius: 50%;
 }
 
-.icon > span{
+.icon > span {
   padding: 0.25rem;
   font-size: var(--font-sm);
   border-radius: var(--border-radius-default);
   margin-right: 0.5rem;
 }
 
-.karly{
+.karly {
   border: 1px solid var(--color-primary);
   color: var(--color-primary);
 }
 
-.limit{
+.limit {
   background: var(--color-gray-100);
 }

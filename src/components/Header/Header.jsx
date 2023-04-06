@@ -32,8 +32,8 @@ export default function Header({ navList: initialNavList }) {
     function handleScroll() {
       setIsSticky(window.scrollY >= 166);
     }
-    
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -75,12 +75,14 @@ export default function Header({ navList: initialNavList }) {
               <form action="" className={classes.headerSearchForm}>
                 <fieldset>
                   <A11yHidden>검색 폼</A11yHidden>
-                  <Label htmlFor="검색" invisibleLabel={true}>검색</Label>
-                  <Input 
-                    type="search" 
-                    placeholder="검색어를 입력해주세요" 
-                    style={{width: '400px',
-                            height: '60px'}}/>
+                  <Label htmlFor="검색" invisibleLabel={true}>
+                    검색
+                  </Label>
+                  <Input
+                    type="search"
+                    placeholder="검색어를 입력해주세요"
+                    style={{ width: '400px', height: '60px' }}
+                  />
                 </fieldset>
                 <IconComponent>
                   <img src={search} alt="검색아이콘" />
@@ -123,7 +125,11 @@ export default function Header({ navList: initialNavList }) {
       <header className={classes.smallHeader}>
         <Container className={classes.headerContainer}>
           <div className={classes.smallHeaderTop}>
-            <Navigation headline="메인메뉴" list={navList} style={{width: '1800px'}}/>
+            <Navigation
+              headline="메인메뉴"
+              list={navList}
+              style={{ width: '1800px' }}
+            />
             <form
               action=""
               className={`${classes.headerSearchForm} ${classes.smallForm}`}

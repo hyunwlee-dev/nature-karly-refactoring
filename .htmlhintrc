@@ -27,8 +27,5 @@
   "attr-value-not-empty": false,
   "attr-no-duplication": true,
   "attr-unsafe-chars": true,
-	"attr-lowercase": [
-    "viewBox",
-    "Test"
-  ]
+  "attr-lowercase": ["viewBox", "Test"]
 }

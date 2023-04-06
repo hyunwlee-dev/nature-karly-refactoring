@@ -62,7 +62,7 @@ export default function ProductList() {
                       <span className={classes.count}>1</span>
                     </li>
                   );
-              })}
+                })}
             </ul>
           </li>
           <li>

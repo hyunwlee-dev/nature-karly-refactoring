@@ -10,11 +10,10 @@
   display: flex;
 }
 
-.Counter 
-.CountInput,
+.Counter .CountInput,
 .MinusButton,
 .DisabledMinusButton,
-.PlusButton{
+.PlusButton {
   background-color: none;
   border: none;
   padding: 0;

@@ -1,29 +1,30 @@
-.article{
+.article {
   /* display: flex; */
   /* justify-content: center; */
 }
 
-.mainPopUpInner{
+.mainPopUpInner {
   width: 440px;
 }
 
-.mainPopUpInner a{
+.mainPopUpInner a {
   display: block;
   height: 586px;
 }
 
-.mainPopUpInner img{
+.mainPopUpInner img {
   border-radius: 20px 20px 0 0;
 }
 
-.buttonWrapper{
+.buttonWrapper {
   display: flex;
-  background-color:pink;
+  background-color: pink;
   height: 86px;
   border-radius: 0 0 20px 20px;
 }
 
-.closeToday,.close{
+.closeToday,
+.close {
   width: 50%;
   display: flex;
   justify-content: center;
@@ -32,11 +33,11 @@
   font-weight: 400;
 }
 
-.closeToday{
+.closeToday {
   border-radius: 0 0 0 20px;
   border-right: 1px solid var(--color-gray-100);
 }
 
-.close{
+.close {
   border-radius: 0 0 20px 0;
 }

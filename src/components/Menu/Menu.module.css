@@ -1,9 +1,9 @@
-.menuWrapper{
+.menuWrapper {
   width: 22%;
   position: relative;
 }
 
-.menu{
+.menu {
   width: 100%;
   display: flex;
   border-style: none;
@@ -13,24 +13,23 @@
   align-items: center;
 }
 
-.menu::before{
-  content: "";
+.menu::before {
+  content: '';
   background-image: url('../../assets/icons/Icon/header/hamburger.svg');
   background-repeat: no-repeat;
   background-position: 0 0.25rem;
-  background-size: .875rem 1rem;
+  background-size: 0.875rem 1rem;
   display: inline-block;
   width: 1rem;
   height: 1.5rem;
   margin-right: 0.75rem;
 }
 
-.menu:hover{
+.menu:hover {
   color: var(--color-primary);
 }
 
-
-.menuList{
+.menuList {
   position: absolute;
   left: -5px;
   top: 72px;
@@ -42,25 +41,25 @@
   overflow: auto;
 }
 
-.menuList a{
+.menuList a {
   height: 40px;
   display: flex;
   align-items: center;
-  padding: .5rem 0 .5rem 2.75rem;
+  padding: 0.5rem 0 0.5rem 2.75rem;
   text-decoration: none;
   color: var(--color-content);
 }
 
-.menuItem{
+.menuItem {
   display: flex;
   position: relative;
 }
 
-.menuItem a{
+.menuItem a {
   width: 100%;
 }
 
-.menuItem a:hover{
+.menuItem a:hover {
   background-color: var(--color-gray-100);
   color: var(--color-primary);
 }

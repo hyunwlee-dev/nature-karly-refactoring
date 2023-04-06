@@ -1,39 +1,38 @@
-.originHeader{
+.originHeader {
   background-color: var(--color-white);
   box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 4px 0px;
 }
 
-.headerTop{
-  margin-top: .75rem;
+.headerTop {
+  margin-top: 0.75rem;
 }
 
-.topMenu{
+.topMenu {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 0.9375rem;
 }
 
-.topMenu a{
+.topMenu a {
   text-decoration: none;
   color: var(--color-content);
-  padding: 0 0.625rem;  
+  padding: 0 0.625rem;
 }
 
-.topMenu img{
-  width: .625rem;
-  margin-left: .1875rem;
+.topMenu img {
+  width: 0.625rem;
+  margin-left: 0.1875rem;
 }
 
-.topMenu li:first-child a{
+.topMenu li:first-child a {
   color: var(--color-primary);
 }
 
-
-.headerSearch{
+.headerSearch {
   display: flex;
 }
 
-.headerSwitch{
+.headerSwitch {
   display: flex;
   padding-right: 3.125rem;
   width: 35%;
@@ -43,17 +42,17 @@
   position: relative;
 }
 
-.headerSwitch a{
+.headerSwitch a {
   padding: 0 0.625rem;
   text-decoration: none;
   color: var(--color-content);
 }
 
-.headerSwitch .activeSwitch{
+.headerSwitch .activeSwitch {
   color: var(--color-primary);
 }
 
-.newIcon{
+.newIcon {
   position: absolute;
   top: 10px;
   right: 55px;
@@ -62,25 +61,24 @@
   color: var(--color-accent);
 }
 
-.headerSearchForm{
+.headerSearchForm {
   width: 50%;
   display: flex;
   align-items: center;
 }
 
-.headerSearchForm div{
+.headerSearchForm div {
   transform: translateX(-2.5rem);
 }
 
-
-.headerIconList{
+.headerIconList {
   width: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.headerIconList li{
+.headerIconList li {
   padding: 0 1rem;
 }
 
@@ -88,16 +86,14 @@
   text-align: center;
 }
 
-.navWrapper{
+.navWrapper {
   display: flex;
   align-items: center;
 }
 
-
-
 /* 스크롤 시 바뀐 헤더 컴포넌트 */
 
-.smallHeader{
+.smallHeader {
   position: fixed;
   top: 0;
   left: 0;
@@ -108,23 +104,23 @@
   height: 72px;
 }
 
-.smallHeaderTop{
+.smallHeaderTop {
   display: flex;
 }
 
-.smallForm{
+.smallForm {
   justify-content: center;
 }
 
-.smallForm input::placeholder{
+.smallForm input::placeholder {
   font-size: 11px;
 }
 
-.smallHeaderIconList li{
+.smallHeaderIconList li {
   padding: 0 0.5rem;
 }
 
-.smallNav{
+.smallNav {
   width: 1200px;
   height: 4.5rem;
   margin: 0 auto;

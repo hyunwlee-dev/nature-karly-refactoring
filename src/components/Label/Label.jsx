@@ -30,7 +30,9 @@ export function Label({
   children,
   ...restProps
 }) {
-  const combineClassNames = `${classes.label} ${className} ${classes[labelStyle]} ${classEssential(isEssential)}`.trim();
+  const combineClassNames = `${classes.label} ${className} ${
+    classes[labelStyle]
+  } ${classEssential(isEssential)}`.trim();
   if (!invisibleLabel) {
     return (
       <label

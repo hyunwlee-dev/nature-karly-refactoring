@@ -1,4 +1,4 @@
-.navSide{
+.navSide {
   width: 96px;
   height: 1.6875rem;
   line-height: 1.6875rem;
@@ -12,6 +12,6 @@
   margin-left: 2.5rem;
 }
 
-.navSide span:first-child{
+.navSide span:first-child {
   color: var(--color-primary);
 }
