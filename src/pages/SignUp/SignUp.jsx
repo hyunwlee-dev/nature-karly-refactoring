@@ -50,7 +50,9 @@ import { useRecoilState } from 'recoil';
 import { useSignUp } from '@/firebase/auth/useSignUp';
 import { useRecoilCallback } from 'recoil';
 import { useRecoilSnapshot } from 'recoil';
-import { useCreateAuthUser } from '@/firebase/firestore';
+import { db, useCreateAuthUser } from '@/firebase/firestore';
+import { useAsync } from '@/hook/useAsync';
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 
 export default function SignUp() {
   const idId = useId();
@@ -174,35 +176,68 @@ export default function SignUp() {
   } = useCreateAuthUser('users');
 
   const getSnapshotEmailAndPwState = useRecoilCallback(({ snapshot }) => () => {
-    const idValue = snapshot.getLoadable(idState).contents;
-    const pwValue = snapshot.getLoadable(pwState).contents;
-    return { idValue, pwValue };
+    const id = snapshot.getLoadable(idState).contents;
+    const pw = snapshot.getLoadable(pwState).contents;
+    return { id, pw };
   });
 
   const getSnapshotOthersState = useRecoilCallback(({ snapshot }) => () => {
-    const nameValue = snapshot.getLoadable(nameState).contents;
-    const emailValue = snapshot.getLoadable(emailState).contents;
-    const phoneValue = snapshot.getLoadable(phoneState).contents;
-    const addressValue = snapshot.getLoadable(addressState).contents;
-    const genderValue = snapshot.getLoadable(genderState).contents;
-    const birthValue = snapshot.getLoadable(birthState).contents;
-    const addtionalValue = snapshot.getLoadable(additionalState).contents;
-    const etcValue = snapshot.getLoadable(etcState).contents;
-    return ({ nameValue, emailValue, phoneValue, addressValue, genderValue, birthValue, addressValue, addtionalValue, etcValue});
+    const name = snapshot.getLoadable(nameState).contents;
+    const email = snapshot.getLoadable(emailState).contents;
+    const phone = snapshot.getLoadable(phoneState).contents;
+    const address = snapshot.getLoadable(addressState).contents;
+    const gender = snapshot.getLoadable(genderState).contents;
+    const birth = snapshot.getLoadable(birthState).contents;
+    const addtional = snapshot.getLoadable(additionalState).contents;
+    const etc = snapshot.getLoadable(etcState).contents;
+    return ({ name, email, phone, address, gender, birth, address, addtional, etc});
   })
 
   const signUpUser = async () => {
-    const { idValue, pwValue } = getSnapshotEmailAndPwState();
-    const updatedIdValue = idValue + '@natureKarly.com';
-    const userAuth = await signUp(updatedIdValue, pwValue);
-    await createAuthUser(userAuth, {idValue, pwValue, ...getSnapshotOthersState()});
+    const { id, pw } = getSnapshotEmailAndPwState();
+    const updatedIdValue = id + '@natureKarly.com';
+    const userAuth = await signUp(updatedIdValue, pw);
+    await createAuthUser(userAuth, {id: updatedIdValue, pw, ...getSnapshotOthersState()});
   };
 
-  if (isLoading || isCreateLoading) {
+  const checkIsExistsUser = async() => {
+    const q = query(collection(db, 'users'), where("id", "==", "toto1234@natureKarly.com"));
+    try {
+      const { docs } = await getDocs(q);
+      return new Promise((resolve) => {
+        resolve(docs.length > 0);
+      })
+    }
+    catch(e) {
+      return new Promise((resolve, reject) => {
+        reject('error: ' + e.message);
+      });
+    }
+  };
+
+  const {
+    data,
+    error: duplicatedIdError,
+    status: duplicatedIdStatus,
+    isLoading: duplicatedIdIsLoading,
+    execute
+  } = useAsync(checkIsExistsUser, false);
+
+  const checkIsDuplicatedId = async() => {
+    try {
+      const result = await execute();
+      console.log('data', data);
+    }
+    catch(e) {
+      
+    }
+  }
+
+  if (isLoading || isCreateLoading || duplicatedIdIsLoading) {
     return <div role="alert">페이지를 준비 중입니다.</div>;
   }
 
-  if (error || createError) {
+  if (error || createError || duplicatedIdError) {
     return <div role="alert">오류! {error + ''}</div>;
   }
 
@@ -232,7 +267,7 @@ export default function SignUp() {
                 />
                 <IdValidation className={classes.idValidation} />
               </div>
-              <Button isSecondary className={classes.idButton}>
+              <Button isSecondary className={classes.idButton} onClick={checkIsDuplicatedId}>
                 중복확인
               </Button>
 

@@ -17,11 +17,11 @@ RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 const container = document.getElementById('root');
 
 createRoot(container).render(
-  <StrictMode>
+  // <StrictMode>
     <RecoilRoot>
       <App />
       <RecoilLogger />
       {/* <TimeTravelObserver /> */}
     </RecoilRoot>
-  </StrictMode>
+  // </StrictMode>
 );
