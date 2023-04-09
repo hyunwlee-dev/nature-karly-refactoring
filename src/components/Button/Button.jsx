@@ -7,6 +7,7 @@ function getIsSecondary(isSecondary) {
 
   return 'primary';
 }
+
 export function Button({ isSecondary, className, children, ...restProps }) {
   const combineClassNames = `${classes.Button} ${
     classes[getIsSecondary(isSecondary)]

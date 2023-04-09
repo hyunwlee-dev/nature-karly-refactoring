@@ -1,5 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
+
 import { onAuthStateChanged } from 'firebase/auth';
+
 import { auth } from './index';
 
 /* -------------------------------------------------------------------------- */
@@ -19,6 +21,7 @@ export function useAuthState() {
 
   useEffect(() => {
     setIsLoading(true);
+
     return onAuthStateChanged(
       auth,
       (currentUser) => {

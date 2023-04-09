@@ -1,22 +1,25 @@
 import { useId, Fragment } from 'react';
 
-import { useSetRecoilState } from 'recoil';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { useSetRecoilState, useRecoilCallback } from 'recoil';
 
 import classes from './SignUp.module.css';
 import {
   additionalState,
-  addressState,
   birthState,
   emailState,
   etcState,
   genderState,
   idState,
+  isIdDuplication,
   nameState,
   phoneState,
   pwState,
   repwState,
 } from '@/@store/signUpState';
 import { Button, Label } from '@/components';
+import { IdCheckButton } from '@/components/Button/IdCheckButton';
+import { SubmitButton } from '@/components/Button/SubmitButton';
 import { Fieldset } from '@/components/Fieldset/Fieldset';
 import { IconComponent } from '@/components/IconComponent/IconComponent';
 import { AdditionalInput } from '@/components/Input/Checkbox/AdditionalInput';
@@ -36,23 +39,10 @@ import { NameValidation } from '@/components/InputValidation/Name/NameValidation
 import { PasswordValidation } from '@/components/InputValidation/Password/passwordValidation';
 import { PhoneValidation } from '@/components/InputValidation/Phone/PhoneValidation';
 import { RePasswordValidation } from '@/components/InputValidation/RePassword/RePasswordValidation';
-import { useDocumentTitle } from '@/hook/useDocumentTitle';
-import { SubmitButton } from '@/components/Button/SubmitButton';
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  sendEmailVerification,
-  updateProfile,
-} from 'firebase/auth';
-import { firebaseApp } from '@/firebase/app';
-import { useState } from 'react';
-import { useRecoilState } from 'recoil';
 import { useSignUp } from '@/firebase/auth/useSignUp';
-import { useRecoilCallback } from 'recoil';
-import { useRecoilSnapshot } from 'recoil';
 import { db, useCreateAuthUser } from '@/firebase/firestore';
 import { useAsync } from '@/hook/useAsync';
-import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
+import { useDocumentTitle } from '@/hook/useDocumentTitle';
 
 export default function SignUp() {
   const idId = useId();
@@ -86,6 +76,8 @@ export default function SignUp() {
   const setGender = useSetRecoilState(genderState);
   const setBirth = useSetRecoilState(birthState);
 
+  const setisIdDuplication = useSetRecoilState(isIdDuplication);
+
   const dataProps = {
     width: '54px',
     height: '19px',
@@ -96,13 +88,12 @@ export default function SignUp() {
 
   useDocumentTitle('회원가입 - 칼리');
 
-  const handleExpandTerms = () => {
-    // console.log('expand terms');
-  };
+  const handleExpandTerms = () => {};
 
   const handleIdInput = (event) => {
     event.preventDefault();
     setId(event.target.value);
+    setisIdDuplication(false);
   };
 
   const handlePwInput = (event) => {
@@ -167,8 +158,7 @@ export default function SignUp() {
     },
   ];
 
-  const firebaseAuth = getAuth(firebaseApp);
-  const { isLoading, error, user, signUp } = useSignUp(false);
+  const { isLoading, error, signUp } = useSignUp(false);
   const {
     isLoading: isCreateLoading,
     error: createError,
@@ -178,6 +168,7 @@ export default function SignUp() {
   const getSnapshotEmailAndPwState = useRecoilCallback(({ snapshot }) => () => {
     const id = snapshot.getLoadable(idState).contents;
     const pw = snapshot.getLoadable(pwState).contents;
+
     return { id, pw };
   });
 
@@ -185,60 +176,67 @@ export default function SignUp() {
     const name = snapshot.getLoadable(nameState).contents;
     const email = snapshot.getLoadable(emailState).contents;
     const phone = snapshot.getLoadable(phoneState).contents;
-    const address = snapshot.getLoadable(addressState).contents;
+    // const address = snapshot.getLoadable(addressState).contents;
     const gender = snapshot.getLoadable(genderState).contents;
     const birth = snapshot.getLoadable(birthState).contents;
     const addtional = snapshot.getLoadable(additionalState).contents;
     const etc = snapshot.getLoadable(etcState).contents;
-    return ({ name, email, phone, address, gender, birth, address, addtional, etc});
-  })
+
+    return { name, email, phone, gender, birth, addtional, etc };
+  });
 
   const signUpUser = async () => {
     const { id, pw } = getSnapshotEmailAndPwState();
-    const updatedIdValue = id + '@natureKarly.com';
+    const updatedIdValue = `${id}@natureKarly.com`;
     const userAuth = await signUp(updatedIdValue, pw);
-    await createAuthUser(userAuth, {id: updatedIdValue, pw, ...getSnapshotOthersState()});
+    await createAuthUser(userAuth, {
+      id: updatedIdValue,
+      pw,
+      ...getSnapshotOthersState(),
+    });
   };
 
-  const checkIsExistsUser = async() => {
-    const q = query(collection(db, 'users'), where("id", "==", "toto1234@natureKarly.com"));
+  const getSnapshotIdState = useRecoilCallback(
+    ({ snapshot }) =>
+      () =>
+        snapshot.getLoadable(idState).contents
+  );
+
+  const checkIsExistsUser = async () => {
     try {
+      const id = `${getSnapshotIdState()}@natureKarly.com`;
+      const q = query(collection(db, 'users'), where('id', '==', id));
       const { docs } = await getDocs(q);
+
       return new Promise((resolve) => {
         resolve(docs.length > 0);
-      })
-    }
-    catch(e) {
-      return new Promise((resolve, reject) => {
-        reject('error: ' + e.message);
+      });
+    } catch (e) {
+      return new Promise((_, reject) => {
+        reject(`error: ${e.message}`);
       });
     }
   };
 
   const {
-    data,
-    error: duplicatedIdError,
-    status: duplicatedIdStatus,
+    // data,
+    // error: duplicatedIdError,
+    // status: duplicatedIdStatus,
     isLoading: duplicatedIdIsLoading,
-    execute
+    execute,
   } = useAsync(checkIsExistsUser, false);
 
-  const checkIsDuplicatedId = async() => {
-    try {
-      const result = await execute();
-      console.log('data', data);
-    }
-    catch(e) {
-      
-    }
-  }
+  const checkIsDuplicatedId = async () => {
+    const response = await execute();
+    setisIdDuplication(!response);
+  };
 
-  if (isLoading || isCreateLoading || duplicatedIdIsLoading) {
+  if (isLoading || isCreateLoading) {
     return <div role="alert">페이지를 준비 중입니다.</div>;
-  }
+  } else if (error || createError) {
+    return error && <div role="alert">오류! {`${error}`}</div>;
 
-  if (error || createError || duplicatedIdError) {
-    return <div role="alert">오류! {error + ''}</div>;
+    return createError && <div role="alert">오류! {`${createError}`}</div>;
   }
 
   return (
@@ -267,9 +265,14 @@ export default function SignUp() {
                 />
                 <IdValidation className={classes.idValidation} />
               </div>
-              <Button isSecondary className={classes.idButton} onClick={checkIsDuplicatedId}>
+              <IdCheckButton
+                isSecondary
+                className={classes.idButton}
+                isLoading={duplicatedIdIsLoading}
+                onClick={checkIsDuplicatedId}
+              >
                 중복확인
-              </Button>
+              </IdCheckButton>
 
               <Label
                 className={classes.pwLabel}
@@ -504,7 +507,7 @@ export default function SignUp() {
                 </Fragment>
               ))}
             </div>
-            <SubmitButton onClick={signUpUser} className={classes.submit}>
+            <SubmitButton className={classes.submit} onClick={signUpUser}>
               가입하기
             </SubmitButton>
           </Fieldset>

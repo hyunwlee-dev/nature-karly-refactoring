@@ -1,5 +1,7 @@
-import { collection, onSnapshot, query, doc } from 'firebase/firestore';
 import { useLayoutEffect, useMemo, useState } from 'react';
+
+import { collection, onSnapshot, query, doc } from 'firebase/firestore';
+
 import { db } from './index';
 
 export function useDataState(collectionKey, documentKey) {
@@ -8,7 +10,9 @@ export function useDataState(collectionKey, documentKey) {
 
   if (collectionKey.includes('/') && !documentKey) {
     const collectionAndDocumentKey = collectionKey.split('/');
+    // eslint-disable-next-line no-param-reassign
     collectionKey = collectionAndDocumentKey[0];
+    // eslint-disable-next-line no-param-reassign
     documentKey = collectionAndDocumentKey[1];
   }
 

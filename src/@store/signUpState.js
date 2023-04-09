@@ -12,13 +12,6 @@ import {
 export const idState = atom({
   key: 'idState',
   default: '',
-  effects: [
-    ({ onSet }) => {
-      onSet((newValue) => {
-        console.log('new Id State Value', newValue);
-      });
-    },
-  ],
 });
 export const pwState = atom({ key: 'pwState', default: '' });
 export const repwState = atom({ key: 'repwState', default: '' });
@@ -57,6 +50,22 @@ export const idValidation = selectorFamily({
     },
 });
 
+export const isIdDuplication = atom({
+  key: 'isIdDuplication',
+  default: false,
+});
+
+export const idTotalValidation = selector({
+  key: 'idTotalValidation',
+  get: ({ get }) => {
+    const idValid = get(idValidation());
+    const idDuplicatedValid = get(isIdDuplication);
+    if (idValid && idDuplicatedValid) return 'perfect';
+    if (idValid) return 'nice';
+
+    return 'good';
+  },
+});
 /* -------------------------------------------------------------------------- */
 
 export const pwValidation = selectorFamily({

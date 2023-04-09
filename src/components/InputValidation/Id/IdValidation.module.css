@@ -1,6 +1,9 @@
-.idValidation.invalid {
-  color: red;
+.idValidation.good {
+  color: var(--color-error);
 }
-.idValidation.valid {
-  color: #25e09a;
+.idValidation.nice {
+  color: var(--color-accent);
+}
+.idValidation.perfect {
+  color: var(--color-primary);
 }

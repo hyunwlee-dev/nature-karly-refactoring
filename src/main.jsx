@@ -6,7 +6,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { RecoilRoot, RecoilEnv } from 'recoil';
-import { RecoilLogger } from 'recoil-devtools-logger';
+// import { RecoilLogger } from 'recoil-devtools-logger';
 
 // import { HelmetProvider } from 'react-helmet-async';
 // import { TimeTravelObserver } from './@recoilDebug';
@@ -17,11 +17,11 @@ RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 const container = document.getElementById('root');
 
 createRoot(container).render(
-  // <StrictMode>
+  <StrictMode>
     <RecoilRoot>
       <App />
-      <RecoilLogger />
+      {/* <RecoilLogger /> */}
       {/* <TimeTravelObserver /> */}
     </RecoilRoot>
-  // </StrictMode>
+  </StrictMode>
 );

@@ -1,5 +1,7 @@
-import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { useCallback, useMemo, useState } from 'react';
+
+import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
+
 import { db } from './index';
 
 /**
@@ -23,6 +25,7 @@ export function useCreateAuthUser(collectionKey = 'users') {
 
       try {
         const userSnapshot = await getDoc(userDocRef);
+        // eslint-disable-next-line max-depth
         if (!userSnapshot.exists()) {
           const { email, displayName } = userAuth;
           const createAt = serverTimestamp();

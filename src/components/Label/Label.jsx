@@ -10,15 +10,6 @@ function classEssential(isEssential) {
   return '';
 }
 
-const getFontSize = (variable) => {
-  if (variable === 'md') return '1rem';
-  if (variable === 'sm') return '0.75rem';
-  if (variable === 'lg') return '1.33125rem';
-  if (variable === 'xl') return '1.775rem';
-  if (variable === 'xxl') return '2.36875rem';
-
-  return '3.15625rem';
-};
 /* ----------------------------------------------------------------------- */
 
 export function Label({
@@ -35,12 +26,7 @@ export function Label({
   } ${classEssential(isEssential)}`.trim();
   if (!invisibleLabel) {
     return (
-      <label
-        className={combineClassNames}
-        htmlFor={htmlFor}
-        // style={{ fontSize: `${getFontSize(fontSize)}` }}
-        {...restProps}
-      >
+      <label className={combineClassNames} htmlFor={htmlFor} {...restProps}>
         {children}
       </label>
     );
@@ -57,7 +43,6 @@ export function Label({
 
 Label.defaultProps = {
   htmlFor: '',
-  fontSize: 'md',
   isEssential: 'none',
   invisibleLabel: false,
   labelStyle: 'Medium',
@@ -65,7 +50,6 @@ Label.defaultProps = {
 
 Label.propTypes = {
   htmlFor: PropTypes.string,
-  fontSize: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', 'xxl', 'xxxl']),
   isEssential: PropTypes.oneOf(['none', 'left', 'right']),
   invisibleLabel: PropTypes.bool,
   labelStyle: PropTypes.oneOf(['Small', 'Medium', 'Large', 'XL', 'XXL']),

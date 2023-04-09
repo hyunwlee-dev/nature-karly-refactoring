@@ -1,13 +1,12 @@
 import { useState, useCallback, useMemo } from 'react';
+
 import {
   createUserWithEmailAndPassword,
   updateProfile,
   sendEmailVerification as firebaseSendEmailVerification,
   getAuth,
 } from 'firebase/auth';
-import { auth } from './index';
-import { emailState, idState, pwState } from '@/@store/signUpState';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+
 import { firebaseApp } from '../app';
 
 /* -------------------------------------------------------------------------- */
@@ -40,15 +39,18 @@ export function useSignUp(sendEmailVerification = false) {
 
         const { user } = userCredentials;
 
+        // eslint-disable-next-line max-depth
         if (displayName && user) {
           await updateProfile(user, { displayName });
         }
 
+        // eslint-disable-next-line max-depth
         if (sendEmailVerification && user) {
           await firebaseSendEmailVerification(user);
         }
 
         setUser(user);
+
         return user;
       } catch (error) {
         setError(error);

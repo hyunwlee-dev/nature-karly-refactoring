@@ -1,9 +1,6 @@
-import { emailState, pwState } from '@/@store/signUpState';
 import PropTypes from 'prop-types';
-import { useRecoilValue } from 'recoil';
 
 import classes from './Button.module.css';
-import { useState } from 'react';
 
 function getIsSecondary(isSecondary) {
   if (isSecondary) return 'secondary';
@@ -22,11 +19,7 @@ export function SubmitButton({
 
   return (
     <>
-      <button
-        className={combineClassNames}
-        type="button"
-        {...restProps}
-      >
+      <button className={combineClassNames} type="button" {...restProps}>
         {children}
       </button>
     </>
