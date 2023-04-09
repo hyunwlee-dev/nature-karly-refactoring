@@ -1,13 +1,17 @@
-import React, { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-import PropTypes from 'prop-types';
 
 import Logo from '../Logo/Logo';
 
 import classes from './Header.module.css';
 
+import cart from '@/assets/icons/Icon/header/Cart.svg';
+import heart from '@/assets/icons/Icon/header/heart.svg';
+import down from '@/assets/icons/Icon/header/Icon_down1.svg';
+import location from '@/assets/icons/Icon/header/location.svg';
+import search from '@/assets/icons/Icon/header/Search.svg';
 import {
+  IconComponent,
   Container,
   Navigation,
   Input,
@@ -15,13 +19,6 @@ import {
   A11yHidden,
   NavSide,
 } from '@/components';
-import { IconComponent } from '@/components';
-
-import location from '@/assets/icons/Icon/header/location.svg';
-import heart from '@/assets/icons/Icon/header/heart.svg';
-import cart from '@/assets/icons/Icon/header/Cart.svg';
-import down from '@/assets/icons/Icon/header/Icon_down1.svg';
-import search from '@/assets/icons/Icon/header/Search.svg';
 
 export default function Header({ navList: initialNavList }) {
   const [navList] = useState(initialNavList);
@@ -58,14 +55,14 @@ export default function Header({ navList: initialNavList }) {
               <li>
                 <a href="#">
                   고객센터
-                  <img src={down} alt="아래화살표" />
+                  <img alt="아래화살표" src={down} />
                 </a>
               </li>
             </ul>
             <div className={classes.headerSearch}>
               <div className={classes.headerSwitch}>
                 <Logo />
-                <a href="#" className={classes.activeSwitch}>
+                <a className={classes.activeSwitch} href="#">
                   마켓칼리
                 </a>
                 <span aria-hidden="true">|</span>
@@ -79,34 +76,34 @@ export default function Header({ navList: initialNavList }) {
                     검색
                   </Label>
                   <Input
-                    type="search"
                     placeholder="검색어를 입력해주세요"
                     style={{ width: '400px', height: '60px' }}
+                    type="search"
                   />
                 </fieldset>
                 <IconComponent>
-                  <img src={search} alt="검색아이콘" />
+                  <img alt="검색아이콘" src={search} />
                 </IconComponent>
               </form>
               <ul className={classes.headerIconList}>
                 <li>
                   <IconComponent>
                     <a href="#">
-                      <img src={location} alt="배송지" />
+                      <img alt="배송지" src={location} />
                     </a>
                   </IconComponent>
                 </li>
                 <li>
                   <IconComponent>
                     <a href="#">
-                      <img src={heart} alt="관심상품" />
+                      <img alt="관심상품" src={heart} />
                     </a>
                   </IconComponent>
                 </li>
                 <li>
                   <IconComponent>
                     <Link to="/cartpage">
-                      <img src={cart} alt="장바구니" />
+                      <img alt="장바구니" src={cart} />
                     </Link>
                   </IconComponent>
                 </li>
@@ -120,68 +117,68 @@ export default function Header({ navList: initialNavList }) {
         </Container>
       </header>
     );
-  } else {
-    return (
-      <header className={classes.smallHeader}>
-        <Container className={classes.headerContainer}>
-          <div className={classes.smallHeaderTop}>
-            <Navigation
-              headline="메인메뉴"
-              list={navList}
-              style={{ width: '1800px' }}
-            />
-            <form
-              action=""
-              className={`${classes.headerSearchForm} ${classes.smallForm}`}
-            >
-              <fieldset>
-                <A11yHidden>검색 폼</A11yHidden>
-                <Label htmlFor="검색" invisibleLabel={true}></Label>
-                <Input
-                  type="search"
-                  placeholder="검색어를 입력해주세요"
-                  style={{
-                    width: '194px',
-                    height: '36px',
-                    backgroundColor: 'var(--color-gray-50)',
-                    border: '1px solid var(--color-primary)',
-                  }}
-                />
-              </fieldset>
-              <IconComponent>
-                <img src={search} alt="검색아이콘" />
-              </IconComponent>
-            </form>
-            <ul
-              className={`${classes.headerIconList} ${classes.smallHeaderIconList}`}
-            >
-              <li>
-                <IconComponent>
-                  <a href="#">
-                    <img src={location} alt="배송지" />
-                  </a>
-                </IconComponent>
-              </li>
-              <li>
-                <IconComponent>
-                  <a href="#">
-                    <img src={heart} alt="관심상품" />
-                  </a>
-                </IconComponent>
-              </li>
-              <li>
-                <IconComponent>
-                  <a href="#">
-                    <img src={cart} alt="장바구니" />
-                  </a>
-                </IconComponent>
-              </li>
-            </ul>
-          </div>
-        </Container>
-      </header>
-    );
   }
+
+  return (
+    <header className={classes.smallHeader}>
+      <Container className={classes.headerContainer}>
+        <div className={classes.smallHeaderTop}>
+          <Navigation
+            headline="메인메뉴"
+            list={navList}
+            style={{ width: '1800px' }}
+          />
+          <form
+            action=""
+            className={`${classes.headerSearchForm} ${classes.smallForm}`}
+          >
+            <fieldset>
+              <A11yHidden>검색 폼</A11yHidden>
+              <Label htmlFor="검색" invisibleLabel={true} />
+              <Input
+                placeholder="검색어를 입력해주세요"
+                type="search"
+                style={{
+                  width: '194px',
+                  height: '36px',
+                  backgroundColor: 'var(--color-gray-50)',
+                  border: '1px solid var(--color-primary)',
+                }}
+              />
+            </fieldset>
+            <IconComponent>
+              <img alt="검색아이콘" src={search} />
+            </IconComponent>
+          </form>
+          <ul
+            className={`${classes.headerIconList} ${classes.smallHeaderIconList}`}
+          >
+            <li>
+              <IconComponent>
+                <a href="#">
+                  <img alt="배송지" src={location} />
+                </a>
+              </IconComponent>
+            </li>
+            <li>
+              <IconComponent>
+                <a href="#">
+                  <img alt="관심상품" src={heart} />
+                </a>
+              </IconComponent>
+            </li>
+            <li>
+              <IconComponent>
+                <a href="#">
+                  <img alt="장바구니" src={cart} />
+                </a>
+              </IconComponent>
+            </li>
+          </ul>
+        </div>
+      </Container>
+    </header>
+  );
 }
 
 Header.propTypes = {

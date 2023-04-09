@@ -1,7 +1,8 @@
+import { useState } from 'react';
+
 import ProductInformation from './ProductInformation/ProductInformation';
 import ProductPrice from './ProductPrice/ProductPrice';
 import { A11yHidden, Button } from '..';
-import { useState } from 'react';
 
 import TangTang from '../../assets/tangtang/detail_view.jpg';
 
@@ -65,12 +66,12 @@ const ProductDetailTable = function ({ name, description, price }) {
             }
           />
           <ProductPrice
+            count={count}
             name={name}
             price={productPrice}
             title={'상품선택'}
-            count={count}
-            onIncrease={onIncrease}
             onDecrease={onDecrease}
+            onIncrease={onIncrease}
           />
           <div className={classes.TotalPrice}>
             <p className={classes.TotalPriceText}>총 상품금액:</p>

@@ -1,5 +1,5 @@
 import classes from './ProductPrice.module.css';
-import Counter from '@/components/Counter/Counter';
+import { Counter } from '@/components/Counter/Counter';
 
 const ProductPrice = function ({
   title,
@@ -17,8 +17,8 @@ const ProductPrice = function ({
         <div className={classes.productPriceCount}>
           <Counter
             count={count}
-            onIncrease={onIncrease}
             onDecrease={onDecrease}
+            onIncrease={onIncrease}
           />
           <p className={classes.Price}>{price}원</p>
         </div>

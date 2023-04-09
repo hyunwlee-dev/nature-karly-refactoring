@@ -1,6 +1,4 @@
-import { Link } from 'react-router-dom';
-
-import PropTypes, { arrayOf, oneOf, string, shape } from 'prop-types';
+import PropTypes, { oneOf, string, shape } from 'prop-types';
 
 import { Menu } from '../Menu/Menu';
 

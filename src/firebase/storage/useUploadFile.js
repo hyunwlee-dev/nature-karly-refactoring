@@ -1,8 +1,26 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
+
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+
 import { storage } from './index';
 
 /* -------------------------------------------------------------------------- */
+
+function getRandomNumber(n = 10) {
+  return Math.floor(Math.random() * n);
+}
+
+function getDigitNumber(digit = 1) {
+  return new Number(`1e${digit}`).valueOf();
+}
+
+function generateId({ prefix = 'euid', digit = 9 } = {}) {
+  const suffix = 'abcdefghijklmnopqrstuvwxyz-_+=';
+
+  return `${prefix}-${getRandomNumber(getDigitNumber(digit))}${suffix[
+    getRandomNumber(suffix.length - 1)
+  ][getRandomNumber(2) > 0 ? 'toUpperCase' : 'toLowerCase']()}`;
+}
 
 /**
  * Firebase 스토리지 파일 업로드 훅
@@ -30,11 +48,13 @@ export function useUploadFiles({ dirName = 'assets', usingId = true } = {}) {
         }
         const [fileName = '', fileExt = ''] = file.name.split('.');
         const fileId = usingId ? `${generateId()}.` : '';
+
         return ref(storage, `${dirName}/${fileName}.${fileId}${fileExt}`);
       });
 
       setIsLoading(true);
 
+      // eslint-disable-next-line max-depth
       try {
         const uploadPromises = filesRef.map((fileRef, index) =>
           uploadBytes(fileRef, files[index])
@@ -63,19 +83,4 @@ export function useUploadFiles({ dirName = 'assets', usingId = true } = {}) {
     () => ({ fileInputRef, uploadFiles, isLoading, error, urlList }),
     [error, isLoading, uploadFiles, urlList]
   );
-}
-
-function generateId({ prefix = 'euid', digit = 9 } = {}) {
-  const suffix = 'abcdefghijklmnopqrstuvwxyz-_+=';
-  return `${prefix}-${getRandomNumber(getDigitNumber(digit))}${suffix[
-    getRandomNumber(suffix.length - 1)
-  ][getRandomNumber(2) > 0 ? 'toUpperCase' : 'toLowerCase']()}`;
-}
-
-function getRandomNumber(n = 10) {
-  return Math.floor(Math.random() * n);
-}
-
-function getDigitNumber(digit = 1) {
-  return new Number(`1e${digit}`).valueOf();
 }

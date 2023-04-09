@@ -1,17 +1,16 @@
 import classes from './Footer.module.css';
 
-import { Container, IconComponent, Button } from '@/components';
-
 import blog from '@/assets/icons/Icon/footer/Blog.svg';
 import faceBook from '@/assets/icons/Icon/footer/faceBook.svg';
 import instagram from '@/assets/icons/Icon/footer/instagram.svg';
-import youtube from '@/assets/icons/Icon/footer/youtube.svg';
-import naverPost from '@/assets/icons/Icon/footer/naverPost.svg';
 
 import isms from '@/assets/icons/Icon/footer/logo_isms.svg';
 import privacy from '@/assets/icons/Icon/footer/logo_privacy.svg';
 import tosspayments from '@/assets/icons/Icon/footer/logo_tosspayments.svg';
 import wooriBank from '@/assets/icons/Icon/footer/logo_wooriBank.svg';
+import naverPost from '@/assets/icons/Icon/footer/naverPost.svg';
+import youtube from '@/assets/icons/Icon/footer/youtube.svg';
+import { Container, IconComponent, Button } from '@/components';
 
 export default function Footer() {
   return (
@@ -124,35 +123,35 @@ export default function Footer() {
               <li>
                 <IconComponent>
                   <a href="#">
-                    <img src={blog} alt="블로그" />
+                    <img alt="블로그" src={blog} />
                   </a>
                 </IconComponent>
               </li>
               <li>
                 <IconComponent>
                   <a href="#">
-                    <img src={faceBook} alt="페이스북" />
+                    <img alt="페이스북" src={faceBook} />
                   </a>
                 </IconComponent>
               </li>
               <li>
                 <IconComponent>
                   <a href="#">
-                    <img src={instagram} alt="인스타그램" />
+                    <img alt="인스타그램" src={instagram} />
                   </a>
                 </IconComponent>
               </li>
               <li>
                 <IconComponent>
                   <a href="#">
-                    <img src={naverPost} alt="네이버포스트" />
+                    <img alt="네이버포스트" src={naverPost} />
                   </a>
                 </IconComponent>
               </li>
               <li>
                 <IconComponent>
                   <a href="#">
-                    <img src={youtube} alt="유튜브" />
+                    <img alt="유튜브" src={youtube} />
                   </a>
                 </IconComponent>
               </li>
@@ -163,7 +162,7 @@ export default function Footer() {
           <li>
             <IconComponent>
               <a href="#">
-                <img src={isms} alt="정보보호관리체계" />
+                <img alt="정보보호관리체계" src={isms} />
               </a>
             </IconComponent>
             <div>
@@ -175,7 +174,7 @@ export default function Footer() {
           <li>
             <IconComponent>
               <a href="#">
-                <img src={privacy} alt="개인정보보호" />
+                <img alt="개인정보보호" src={privacy} />
               </a>
             </IconComponent>
             <div>
@@ -186,7 +185,7 @@ export default function Footer() {
           <li>
             <IconComponent style={{ width: '102px', height: '32px' }}>
               <a href="#">
-                <img src={tosspayments} alt="토스페이먼츠" />
+                <img alt="토스페이먼츠" src={tosspayments} />
               </a>
             </IconComponent>
             <p>
@@ -197,7 +196,7 @@ export default function Footer() {
           <li>
             <IconComponent style={{ width: '34px', height: '34px' }}>
               <a href="#">
-                <img src={wooriBank} alt="우리은행" />
+                <img alt="우리은행" src={wooriBank} />
               </a>
             </IconComponent>
             <p>

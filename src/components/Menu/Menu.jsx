@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import classes from './Menu.module.css';
 
@@ -26,8 +26,9 @@ export function Menu(props) {
   return (
     <div
       className={classes.menuWrapper}
-      onMouseOver={handleMouseOver}
+      onFocus={handleMouseOver}
       onMouseLeave={handleMouseLeave}
+      onMouseOver={handleMouseOver}
     >
       <button className={classes.menu}>카테고리</button>
       {dropDown && (
@@ -45,7 +46,7 @@ export function Menu(props) {
                   top: '8px',
                   left: '8px',
                 }}
-              ></IconComponent>
+              />
               <a href="#">{item.text}</a>
             </li>
           ))}

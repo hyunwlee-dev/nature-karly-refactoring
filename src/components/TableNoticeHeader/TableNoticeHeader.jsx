@@ -1,8 +1,7 @@
 import { bool, string } from 'prop-types';
 
-import { IconComponent, Tag } from '@/components';
-
 import classes from './TableNoticeHeader.module.css';
+import { IconComponent, Tag } from '@/components';
 
 export function TableNoticeHeader({
   additional,

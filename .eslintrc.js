@@ -59,7 +59,7 @@ module.exports = {
     // 불필요한 반복문은 사용할 수 없다
     'no-unreachable-loop': ['error'],
     // 도달하지 못하는 코드는 사용할 수 없다
-    'no-unreachable': ['error'],
+    'no-unreachable': ['warn'],
     // import한 심볼은 읽기 전용이다
     'no-import-assign': ['error'],
     // 파라미터는 읽기 전용이다

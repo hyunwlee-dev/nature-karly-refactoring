@@ -24,6 +24,7 @@ export function ProductPopUpInput({ inputName }) {
   return (
     <input
       ref={titleInput}
+      autoComplete="off"
       className={classes.formInput}
       id={inputName}
       maxLength="35"
@@ -31,7 +32,6 @@ export function ProductPopUpInput({ inputName }) {
       placeholder="제목을 입력해주세요"
       type="text"
       onChange={getTitleText}
-      autoComplete="off"
     />
   );
 }
