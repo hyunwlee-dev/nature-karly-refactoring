@@ -11,9 +11,9 @@ function getIsSecondary(isSecondary) {
   return 'primary';
 }
 
-function useCheckIsClickable(isLoading = false) {
+function useCheckIsUnclickable(isLoading = false) {
   const idValidState = useRecoilValue(idTotalValidation);
-  if (isLoading || idValidState === 'good') {
+  if (isLoading || idValidState === 'good' || idValidState === 'perfect') {
     return true;
   }
 
@@ -34,7 +34,7 @@ export function IdCheckButton({
   return (
     <button
       className={combineClassNames}
-      disabled={useCheckIsClickable(isLoading)}
+      disabled={useCheckIsUnclickable(isLoading)}
       type="button"
       {...restProps}
     >
