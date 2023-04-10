@@ -67,7 +67,6 @@ export const idTotalValidation = selector({
   },
 });
 /* -------------------------------------------------------------------------- */
-
 export const pwValidation = selectorFamily({
   key: 'pwValidation',
   get:
@@ -77,10 +76,15 @@ export const pwValidation = selectorFamily({
     },
 });
 
+/* -------------------------------------------------------------------------- */
+
 export const repwValidation = selector({
   key: 'repwValidation',
   get: ({ get }) => {
-    return get(pwState) === get(repwState);
+    const pwStateVal = get(pwState);
+    const repwStateVal = get(repwState);
+
+    return repwStateVal.length > 0 && pwStateVal === repwStateVal;
   },
 });
 

@@ -22,7 +22,7 @@ export function RePasswordValidation({ className }) {
         <div className={combineClassName}>비밀번호가 일치합니다!</div>
       )}
       {!isValidate && (
-        <div className={combineClassName}>비밀번호가 일치하지 않습니다.</div>
+        <div className={combineClassName}>비밀번호를 다시 확인해주세요.</div>
       )}
     </Fragment>
   );
